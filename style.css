@@ -1,0 +1,43 @@
+.outer-div{
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.inner-div{
+    width: 450px;
+    height: 600px;
+    background-color: black;
+}
+.top-area{
+    background-color: beige;
+    width: fit-content;
+    height: 125px
+}
+#inp-label{
+    display: flex;
+    text-align: right;
+    justify-content: end;
+    width: 385px;
+    height: 50px;
+    background-color: blue;
+    margin-left: 30px;
+    margin-top: 30px;
+    font-size: 35px;
+}
+#inp-label2{
+    display: flex;
+    text-align: right;
+    justify-content: end;
+    width: 385px;
+    height: 50px;
+    background-color: green;
+    margin-left: 30px;
+    font-size: 35px;
+}
+.button-num{
+    width: 60px;
+    height: 60px;
+    font-size: 30px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
