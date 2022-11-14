@@ -1,192 +1,149 @@
-let a = document.getElementById("text");
-let clas = document.getElementsByClassName("numbers");
-console.log(clas);
-for (let key of clas) {
-  console.log(key.id[1]);
+var input = document.getElementById("text");
+ var number = document.querySelectorAll(".numbers");
+ var operator = document.querySelectorAll(".operators");
+ var result = document.getElementById("result");
+ var clear = document.getElementById("clear");
+ var resultDisplayed = false;
 
-  key.addEventListener("click", function () {
-    if (a.textContent.length < 11) {
-      a.textContent += Number(key.id[1]);
+for (var i = 0; i < number.length; i++) {
+  number[i].addEventListener("click", function (e) {
+    var currentString = input.innerHTML;
+    var lastChar = currentString[currentString.length - 1];
+
+    if (resultDisplayed === false) {
+      input.innerHTML += e.target.innerHTML;
+    } else if (
+      (resultDisplayed === true && lastChar === "+") ||
+      lastChar === "-" ||
+      lastChar === "×" ||
+      lastChar === "/"
+    ) {
+      resultDisplayed = false;
+      input.innerHTML += e.target.innerHTML;
     } else {
-      alert("maximum limit of digit is reached!");
+      resultDisplayed = false;
+      input.innerHTML = "";
+      input.innerHTML += e.target.innerHTML;
     }
   });
 }
-document.getElementById("del").addEventListener("click", function () {
-  let b = a.textContent;
-  let c = b.substring(0, b.length - 1);
-  a.textContent = c;
-});
-
-let sp = document.getElementById("span");
-document.getElementById("clear").addEventListener("click", function () {
-  a.textContent = "";
-  sp.textContent = "";
-});
-
-let num1, num2;
-
-document.getElementById("add").addEventListener("click", function () {
-  num1 = a.textContent;
-  a.textContent = "";
-  sp.textContent = "Addition";
-});
-document.getElementById("subt").addEventListener("click", function () {
-  num1 = a.textContent;
-  a.textContent = "";
-  sp.textContent = "Subtraction";
-});
-document.getElementById("multi").addEventListener("click", function () {
-  num1 = a.textContent;
-  a.textContent = "";
-  sp.textContent = "Multiplication";
-});
-document.getElementById("division").addEventListener("click", function () {
-  num1 = a.textContent;
-  a.textContent = "";
-  sp.textContent = "Division";
-});
-document.getElementById("rem").addEventListener("click", function () {
-  num1 = a.textContent;
-  a.textContent = "";
-  sp.textContent = "Remainder";
-});
-document.getElementById("sin").addEventListener("click", function () {
-  num1 = a.textContent;
-  a.textContent = "";
-  sp.textContent = "Sin()";
-});
-document.getElementById("cos").addEventListener("click", function () {
-  num1 = a.textContent;
-  a.textContent = "";
-  sp.textContent = "Cos()";
-});
-document.getElementById("tan").addEventListener("click", function () {
-  num1 = a.textContent;
-  a.textContent = "";
-  sp.textContent = "Tan()";
-});
-document.getElementById("sqrt").addEventListener("click", function () {
-  num1 = a.textContent;
-  a.textContent = "";
-  sp.textContent = "Square root";
-});
-document.getElementById("pow").addEventListener("click", function () {
-  num1 = a.textContent;
-  a.textContent = "";
-  sp.textContent = "Power";
-});
-document.getElementById("log").addEventListener("click", function () {
-  num1 = a.textContent;
-  a.textContent = "";
-  sp.textContent = "Logarithm(base 10)";
-});
-document.getElementById("pi").addEventListener("click", function () {
-  a.textContent = "3.141592653";
-  num1 = "3.141592653";
-});
-document.getElementById("expo").addEventListener("click", function () {
-  a.textContent = "2.718281828";
-  num1 = "2.718281828";
-});
-let angle = document.getElementById("angle");
-document.getElementById("equal").addEventListener("click", function () {
-  num2 = a.textContent;
-  if (sp.textContent == "Addition") {
-    a.textContent = String(Number(num1) + Number(num2));
-  } else if (sp.textContent == "Subtraction") {
-    a.textContent = String(Number(num1) - Number(num2));
-  } else if (sp.textContent == "Multiplication") {
-    a.textContent = String(Number(num1) * Number(num2));
-  } else if (sp.textContent == "Division") {
-    if (num2 == 0) {
-      a.textContent = "not defined";
+//d
+for (var i = 0; i < operator.length; i++) {
+  operator[i].addEventListener("click", function (e) {
+    var currentString = input.innerHTML;
+    var lastChar = currentString[currentString.length - 1];
+    if (
+      lastChar === "+" ||
+      lastChar === "-" ||
+      lastChar === "×" ||
+      lastChar === "/"
+    ) {
+      var newString =
+        currentString.substring(0, currentString.length - 1) +
+        e.target.innerHTML;
+      input.innerHTML = newString;
+    } else if (currentString.length == 0) {
+      alert("enter a number first");
     } else {
-      a.textContent = String(Number(num1) / Number(num2));
+      input.innerHTML += e.target.innerHTML;
     }
-  } else if (sp.textContent == "Remainder") {
-    if (num2 == 0) {
-      a.textContent = String(num1);
-    } else {
-      a.textContent = String(Number(num1) % Number(num2));
-    }
-  } else if (sp.textContent == "Tan()") {
-    if ((angle.textContent = "Rad")) {
-      num2 = (num2 * Math.PI) / 180;
-    }
-    a.textContent = String(Math.tan(num2));
-  } else if (sp.textContent == "Sin()") {
-    if ((angle.textContent = "Rad")) {
-      num2 = (num2 * Math.PI) / 180;
-    }
-    a.textContent = String(Math.sin(num2));
-  } else if (sp.textContent == "Cos()") {
-    if ((angle.textContent = "Rad")) {
-      num2 = (num2 * Math.PI) / 180;
-    }
-    a.textContent = String(Math.cos(num2));
-  } else if (sp.textContent == "Square root") {
-    a.textContent = String(Math.sqrt(num2));
-  } else if (sp.textContent == "Power") {
-    a.textContent = String(Math.pow(num1, num2));
-  } else if (sp.textContent == "Logarithm(base 10)") {
-    a.textContent = String(Math.log10(num2));
-  }
-});
+  });
+}
 
-let counter = 0;
-document.getElementById("angle").addEventListener("click", function () {
-  counter++;
-  if (counter % 2 == 1) {
-    angle.textContent = "Rad";
-  } else {
-    angle.textContent = "Deg";
-  }
-});
+result.addEventListener("click", function() {
+  var inputString = input.innerHTML;
+  var numbers = inputString.split(/\+|\-|\×|\//g);
+  var operators = inputString.replace(/[0-9]|\./g, "").split("");
 
-let counter2 = 0;
-document.getElementById("mode").addEventListener("click", function () {
-  counter2++;
-  if (counter2 % 2 == 1) {
-    this.textContent = "NormalMode";
-    document.getElementById("calc").style.backgroundColor = "black";
-    document.getElementById("operation").style.color = "white";
-    document.getElementById("span").style.color = "black";
-    document.getElementById("text").style.border = "3px solid white";
-    document.getElementById("calc").style.border = "5px solid white";
-  } else {
-    this.textContent = "NightMode";
-    document.getElementById("calc").style.backgroundColor = "azure";
-    document.getElementById("operation").style.color = "black";
-    document.getElementById("text").style.border = "3px solid black";
-    document.getElementById("calc").style.border = "5px outset black";
-  }
-});
+  console.log(inputString);
+  console.log(operators);
+  console.log(numbers);
 
-window.addEventListener("keydown", function (e) {
-  console.log(e.key);
-  let k = String(e.key);
-  if (
-    k == 0 ||
-    k == 1 ||
-    k == 2 ||
-    k == 3 ||
-    k == 4 ||
-    k == 5 ||
-    k == 6 ||
-    k == 7 ||
-    k == 8 ||
-    k == 9 ||
-    k == "."
-  ) {
-    if (a.textContent.length < 11) {
-      a.textContent += k;
-    } else {
-      alert("maximum limit of digit is reached!");
-    }
-  } else if (k == "Backspace") {
-    b = a.textContent;
-    c = b.substring(0, b.length - 1);
-    a.textContent = c;
+
+  
+  console.log("----------------------------");
+
+  var divide = operators.indexOf("/");
+  while (divide != -1) {
+    numbers.splice(divide, 2, numbers[divide] / numbers[divide + 1]);
+    operators.splice(divide, 1);
+    divide = operators.indexOf("/");
   }
+  var multiply = operators.indexOf("×");
+  while (multiply != -1) {
+    numbers.splice(multiply, 2, numbers[multiply] * numbers[multiply + 1]);
+    operators.splice(multiply, 1);
+    multiply = operators.indexOf("×");
+  }
+
+  var subtract = operators.indexOf("-");
+  while (subtract != -1) {
+    numbers.splice(subtract, 2, numbers[subtract] - numbers[subtract + 1]);
+    operators.splice(subtract, 1);
+    subtract = operators.indexOf("-");
+  }
+
+  var add = operators.indexOf("+");
+  while (add != -1) {
+    numbers.splice(add, 2, parseFloat(numbers[add]) + parseFloat(numbers[add + 1]));
+    operators.splice(add, 1);
+    add = operators.indexOf("+");
+  }
+
+  input.innerHTML = numbers[0]; 
+
+  resultDisplayed = true; 
 });
+clear.addEventListener("click", function() {
+  input.innerHTML = "";
+})
+
+
+// let displayNum=document.getElementsByClassName('numbers')
+// let currentNum=document.getElementById('text')
+// let exp=[];
+
+// for (let key of displayNum){
+//   console.log(key.value)
+//     key.addEventListener('click', function(){
+//       //currentNum.textContent+=key.value
+//       if(key.value=== '+' || key.value=== '-' || key.value=== 'x' || key.value=== '/' ){
+//         exp.push(currentNum.textContent);
+//         exp.push(key.value)
+//         currentNum.textContent=''
+//       }else{
+//        currentNum.textContent+=key.value
+//       }
+//     })
+
+// }
+
+// document.getElementById("equal").addEventListener("click", function () {
+//   exp.push(currentNum.textContent);
+//   var reslt=operate();
+//   console.log(exp)
+//   console.log(reslt);
+// })
+
+// document.getElementById('clr').addEventListener('click',function(){
+//   exp=[];
+//   currentNum.textContent='';
+
+// })
+
+// function operate(){
+//   for(i=0;i<exp.length;i++){
+
+//     if(exp[i] === "+"){
+//       console.log(exp[i])
+//     }else if(exp[i]==='-'){
+
+//     }else if(exp[i]=== '/'){
+
+//     }else if(exp[i]==='x'){
+
+//     }
+
+//   }
+
+// }
